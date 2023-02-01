@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { WinCheckService } from '../win-check.service';
 
 @Component({
@@ -7,7 +8,7 @@ import { WinCheckService } from '../win-check.service';
   styleUrls: ['./two-player.component.scss']
 })
 export class TwoPlayerComponent implements OnInit {
-  constructor(private winCheck: WinCheckService) { }
+  constructor(private winCheck: WinCheckService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -38,5 +39,17 @@ export class TwoPlayerComponent implements OnInit {
       this.gameStatus = 'done'
       this.winner = 'draw'
     }
+  }
+
+  goToHome() {
+    this.router.navigate(['home'])
+  }
+
+  playAgain() {
+    this.gameMatrix = Array(9).fill(null)
+    this.gameStatus = 'ongoing'
+    this.turnsPlayed = 0
+    this.winner = null
+    this.currentTurn = 'X'
   }
 }
