@@ -1,0 +1,9 @@
+<h1 class="current-turn">Current Turn: {{ currentTurn }}</h1>
+<div class="board-container">
+    <div class="square" *ngFor="let square of gameMatrix; let i = index" (click)="play(i)">{{ square }}</div>
+</div>
+<ng-container [ngSwitch]="winner">
+    <h1 class="game-status" *ngSwitchCase="'X'">{{ winner }} WON !</h1>
+    <h1 class="game-status" *ngSwitchCase="'O'">{{ winner }} WON !</h1>
+    <h1 class="game-status" *ngSwitchCase="'draw'">Draw.</h1>
+</ng-container>
