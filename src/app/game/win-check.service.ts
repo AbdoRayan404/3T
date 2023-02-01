@@ -21,11 +21,11 @@ export class WinCheckService {
     for(let i = 0; i < this.lines.length; i++){
       const [a, b, c] = this.lines[i]
 
-      if(gameMatrix[a] === gameMatrix[b] && gameMatrix[c] === gameMatrix[b]){
+      if(gameMatrix[a] && gameMatrix[a] === gameMatrix[b] && gameMatrix[c] === gameMatrix[b]){
         return gameMatrix[a]
       }
     }
-    
+
     return null
   }
 }
