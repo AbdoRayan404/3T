@@ -1,0 +1,3 @@
+<div class="board-container">
+    <div class="square" *ngFor="let square of matrix; let i = index" (click)="play(i)">{{ square }}</div>
+</div>
