@@ -14,7 +14,8 @@ export class BoardComponent implements OnInit {
     this.emitGameStatus()
   }
 
-  @Output() gameStatusChange = new EventEmitter()
+  @Output() gameStateChangeEvent = new EventEmitter()
+  @Output() turnPlayEvent = new EventEmitter()
   matrix = Array(9).fill(null)
   turnsPlayed = 0
   winner = null
@@ -24,10 +25,12 @@ export class BoardComponent implements OnInit {
 
   play(index: number) {
     if(!this.matrix[index] && this.gameStatus == 'ongoing'){
-      this.matrix[index] = this.currentTurn;
-      this.currentTurn == 'X' ? this.currentTurn = 'O' : this.currentTurn = 'X';
+      let turnPlayed = this.currentTurn
+      this.matrix[index] = this.currentTurn
       this.turnsPlayed++
+      this.currentTurn == 'X' ? this.currentTurn = 'O' : this.currentTurn = 'X'
 
+      this.turnPlayEvent.emit(turnPlayed)
       this.checkWin()
     }
   }
@@ -57,6 +60,6 @@ export class BoardComponent implements OnInit {
   }
 
   emitGameStatus() {
-    this.gameStatusChange.emit({turnsPlayer: this.turnsPlayed, winner: this.winner, gameStatus: this.gameStatus, currentTurn: this.currentTurn})
+    this.gameStateChangeEvent.emit({turnsPlayer: this.turnsPlayed, winner: this.winner, gameStatus: this.gameStatus, currentTurn: this.currentTurn, matrix: this.matrix})
   }
 }

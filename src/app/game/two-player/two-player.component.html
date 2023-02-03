@@ -1,5 +1,5 @@
 <h1 class="current-turn">Current Turn: {{ currentTurn }}</h1>
-<app-board (gameStatusChange)="onGameStatusUpdate($event)"></app-board>
+<app-board (gameStateChangeEvent)="onGameStatusUpdate($event)"></app-board>
 <div class="result-container">
     <ng-container [ngSwitch]="winner">
         <h1 class="game-status" *ngSwitchCase="'X'">{{ winner }} WON !</h1>
