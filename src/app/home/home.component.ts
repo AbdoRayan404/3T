@@ -16,4 +16,8 @@ export class HomeComponent implements OnInit {
   goTo2PGame() {
     this.router.navigate(['play/twoplayer'])
   }
+
+  goTo1PGame() {
+    this.router.navigate(['play/oneplayer'])
+  }
 }

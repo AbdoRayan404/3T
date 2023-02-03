@@ -1,0 +1,29 @@
+.current-turn {
+    width: 450px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.game-status {
+    width: 300px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.result-container {
+    width: 300px;
+    margin: auto;
+    display: grid;
+    grid-template: 1;
+
+    .game-status {
+        margin-bottom: 20px;
+    }
+
+    button {
+        width: 120px;
+        margin: auto;
+    }
+}

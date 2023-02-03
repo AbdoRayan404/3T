@@ -1,0 +1,12 @@
+<h1 class="current-turn">Current Turn: {{ currentTurnToView }}</h1>
+<app-board (gameStateChangeEvent)="onGameStatusUpdate($event)" (turnPlayEvent)="onGamePlay($event)"></app-board>
+<div class="result-container">
+    <ng-container [ngSwitch]="winner">
+        <h1 class="game-status" *ngSwitchCase="'X'">Player WON !</h1>
+        <h1 class="game-status" *ngSwitchCase="'O'">Computer WON !</h1>
+        <h1 class="game-status" *ngSwitchCase="'draw'">Draw.</h1>
+    </ng-container>
+    
+    <button (click)="playAgain()" *ngIf="gameStatus == 'done'">Again?</button>
+    <button (click)="goToHome()" *ngIf="gameStatus == 'done'">Home</button>
+</div>
