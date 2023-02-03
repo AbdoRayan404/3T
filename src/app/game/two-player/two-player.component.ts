@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { WinCheckService } from '../win-check.service';
+import { BoardComponent } from '../board/board.component';
 
 @Component({
   selector: 'app-two-player',
@@ -8,37 +8,20 @@ import { WinCheckService } from '../win-check.service';
   styleUrls: ['./two-player.component.scss']
 })
 export class TwoPlayerComponent implements OnInit {
-  constructor(private winCheck: WinCheckService, private router: Router) { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
-
-  currentTurn: 'X' | 'O' = 'X'
-  turnsPlayed = 0
-  winner = null
-  gameMatrix = Array(9).fill(null)
+  
+  @ViewChild(BoardComponent) child;
+  currentTurn
   gameStatus = 'ongoing'
+  winner = null
 
-  play(index: number) {
-    if(!this.gameMatrix[index] && this.gameStatus == 'ongoing'){
-      this.gameMatrix[index] = this.currentTurn;
-      this.currentTurn == 'X' ? this.currentTurn = 'O' : this.currentTurn = 'X';
-      this.turnsPlayed++
-
-      this.checkWin()
-    }
-  }
-
-  checkWin() {
-    let winner = this.winCheck.check(this.gameMatrix)
-
-    if(winner){
-      this.gameStatus = 'done'
-      this.winner = winner
-    }else if(this.turnsPlayed == 9){
-      this.gameStatus = 'done'
-      this.winner = 'draw'
-    }
+  onGameStatusUpdate(data) {
+    this.currentTurn = data.currentTurn
+    this.gameStatus = data.gameStatus
+    this.winner = data.winner
   }
 
   goToHome() {
@@ -46,10 +29,6 @@ export class TwoPlayerComponent implements OnInit {
   }
 
   playAgain() {
-    this.gameMatrix = Array(9).fill(null)
-    this.gameStatus = 'ongoing'
-    this.turnsPlayed = 0
-    this.winner = null
-    this.currentTurn = 'X'
+    this.child.resetBoard()
   }
 }
