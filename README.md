@@ -3,5 +3,5 @@
 
 # Development Phases
 - [X] Player vs Player  (2P)
-- [ ] Player vs Compuer (1P)
+- [X] Player vs Compuer (1P)
 - [ ] Online 2P
